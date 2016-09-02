@@ -1,5 +1,4 @@
 class ApplicationController < ActionController::API
-  include AbstractController::Translation
   include ActionController::Serialization
 
   before_action :authenticate_user_from_token!
@@ -10,7 +9,6 @@ class ApplicationController < ActionController::API
   # Authenticates the user with OAuth2 Resource Owner Password Credentials Grant
   def authenticate_user_from_token!
     auth_token = request.headers['Authorization']
-
     if auth_token
       authenticate_with_auth_token auth_token
     else

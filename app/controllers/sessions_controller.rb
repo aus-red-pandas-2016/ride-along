@@ -2,6 +2,7 @@ class SessionsController < ApplicationController
   skip_before_action :authenticate_user_from_token!
 
   def create
+    puts request.headers.inspect
     @user = User.find_for_database_authentication(email: params[:username])
     return invalid_login_attempt unless @user
 
@@ -17,7 +18,7 @@ class SessionsController < ApplicationController
 
   def invalid_login_attempt
     warden.custom_failure!
-    render json: {error: t('sessions_controller.invalid_login_attempt')}
+    render json: {error: t('sessions_controller.invalid_login_attempt')}, status: :unprocessable_entity
   end
 
 end

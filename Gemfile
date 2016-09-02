@@ -25,6 +25,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.5'
   gem 'factory_girl_rails'
   gem 'irbtools', require: 'irbtools/binding'
+  gem 'pry'
 end
 
 group :development do
