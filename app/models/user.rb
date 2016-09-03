@@ -10,6 +10,9 @@ class User < ApplicationRecord
   has_one :work
   has_one :home
 
+  has_many :trips, foreign_key: :driver_id
+  has_and_belongs_to_many :rides, class_name: 'Trip'
+
   private
   def update_access_token!
     self.access_token = "#{self.id}:#{Devise.friendly_token}"
