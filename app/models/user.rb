@@ -7,6 +7,9 @@ class User < ApplicationRecord
 
   validates_presence_of :username, :email
 
+  has_one :work
+  has_one :home
+
   private
   def update_access_token!
     self.access_token = "#{self.id}:#{Devise.friendly_token}"
