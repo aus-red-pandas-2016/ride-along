@@ -26,6 +26,7 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'irbtools', require: 'irbtools/binding'
   gem 'pry'
+  gem 'faker'
 end
 
 group :development do
