@@ -45,6 +45,40 @@ RSpec.describe UsersController, type: :controller do
       it { should respond_with 422 }
     end
   end
+
+  describe 'PUT/PATCH #update' do
+    context 'when successfully updated' do
+      before(:each) do
+        @user = create(:user)
+        patch :update, params: { id: @user.id, user: { email: 'newmail@example.com' } }
+      end
+
+      it 'renders json representation of the updated user' do
+        user_response = JSON.parse(response.body, symbolize_names: true)
+        expect(response_body[:email]).to eq 'newmail@example.com'
+      end
+
+      it { should respond_with 200 }
+    end
+    context 'when not updated' do
+      before(:each) do
+        @user = create(:user)
+        patch :update, params: { id: @user.id, user: { email: 'bademail.com' } }
+      end
+
+      it 'renders json error' do
+        user_response = JSON.parse(response.body, symbolize_names: true)
+        expect(user_response[:errors]).to have_key(:email)
+      end
+
+      it 'renders the json on why the user could not be created' do
+        user_response = JSON.parse(response.body, symbolize_names: true)
+        expect(user_response[:errors][:email]).to include "is invalid"
+      end
+
+      it { should respond_with 422 }
+    end
+  end
 end
 
 def response_body
