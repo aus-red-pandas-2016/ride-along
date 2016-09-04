@@ -11,9 +11,10 @@ class TripsController < ApplicationController
   end
 
   def create
-    @trip = user.trips.new(driver_id: params[:user_id],trips_type: params[:type])
+    user = User.find(params[:user_id])
+    @trip = user.trips.new(driver_id: user.id,trips_type: params[:type])
     if @trip.save 
-      render json: @trip, status: :created, location: @trip
+      render json: @trip, status: :created
     else
       render json: @trip.errors, status: :unprocessable_entity
     end 

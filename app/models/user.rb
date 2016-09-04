@@ -11,7 +11,7 @@ class User < ApplicationRecord
   has_one :home
 
   has_many :trips, foreign_key: :driver_id
-  has_and_belongs_to_many :rides, class_name: 'Trip'
+  has_and_belongs_to_many :rides, class_name: 'Trip', foreign_key: :user_id
 
   private
   def update_access_token!
