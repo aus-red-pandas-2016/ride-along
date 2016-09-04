@@ -5,8 +5,7 @@ RSpec.describe UsersController, type: :controller do
     it 'returns the users info' do
       user = create(:user)
 
-      @request.env["devise.mapping"] = Devise.mappings[:user]
-      get :show, id: user.id, format: :json, auth_token: user.access_token
+      get :show, params: { id: user.id }, format: :json
 
       expect(response).to be_successful
     end
