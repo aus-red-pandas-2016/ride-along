@@ -11,7 +11,7 @@ describe Authenticable do
   describe '#current_user' do
     before do
       user = create(:user)
-      request.header["Authorization"] = user.auth_token
+      request.headers["Authorization"] = user.auth_token
       allow(authentication).to receive(:request).and_return(request)
     end
 
