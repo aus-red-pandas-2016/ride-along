@@ -1,18 +1,9 @@
 class PlacesController < ApplicationController
 	skip_before_action :authenticate_user_from_token!
-	def create
-    @place = Place.new place_params
-
-    if @place.save
-      render json: @place, status: :created, location: @place
-    else
-      render json: @place.errors, status: :unprocessable_entity
-    end
-  end
+	
 
   def show
-  	@place = Place.find(1)
-  	render json: @place
+    respond_with Place.find(params[:id])
   end
 	
 	def delete
