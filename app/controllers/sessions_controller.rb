@@ -15,9 +15,10 @@ class SessionsController < ApplicationController
     end
   end
 
-  # private
-  # def invalid_login_attempt
-  #   warden.custom_failure!
-  #   render json: {error: t('sessions_controller.invalid_login_attempt')}, status: :unprocessable_entity
-  # end
+  def destroy
+    user = User.find_by_auth_token params[:id]
+    user.generate_authentication_token!
+    user.save
+    head 204
+  end
 end

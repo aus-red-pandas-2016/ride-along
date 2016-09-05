@@ -33,4 +33,14 @@ RSpec.describe SessionsController, type: :controller do
       it { should respond_with 422 }
     end
   end
+
+  describe 'DELETE #destroy' do
+    before(:each) do
+      @user = create(:user)
+      sign_in @user
+      delete :destroy, params: { id: @user.auth_token }
+    end
+
+    it { should respond_with 204 }
+  end
 end
