@@ -3,10 +3,7 @@ require 'rails_helper'
 RSpec.describe PlacesController, type: :controller do
 	describe "GET #show" do
 		before(:each) do
-			@user = FactoryGirl.create :user
-      @place = FactoryGirl.create :place
-      binding.pry
-      @user.places.push(@place)
+      @place = FactoryGirl.build :place
     end
     it 'returns the places info' do
       get :show, params: {id: @place.id}

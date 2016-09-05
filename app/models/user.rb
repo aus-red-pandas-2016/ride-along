@@ -1,19 +1,21 @@
 class User < ApplicationRecord
+  # acts_as_token_authenticatable
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable
-
-  after_create :update_access_token!
-
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :trackable, :validatable
   validates_presence_of :email
+  validates_uniqueness_of :email, :auth_token
+
+  before_create :generate_authentication_token!
 
   has_one :work
   has_one :home
   has_many :places
 
-  private
-  def update_access_token!
-    self.access_token = "#{self.id}:#{Devise.friendly_token}"
-    save
+  def generate_authentication_token!
+    begin
+      self.auth_token = Devise.friendly_token
+    end while self.class.exists?(auth_token: auth_token)
   end
 end
