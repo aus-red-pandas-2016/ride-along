@@ -5,7 +5,7 @@ class User < ApplicationRecord
 
   after_create :update_access_token!
 
-  validates_presence_of :username, :email
+  validates_presence_of :email
 
   has_one :work
   has_one :home
