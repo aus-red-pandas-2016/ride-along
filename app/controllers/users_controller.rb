@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :update]
+  before_action :authenticate_with_token!, only: [:update, :destroy]
 
   def show
     render json: @user
@@ -23,6 +24,11 @@ class UsersController < ApplicationController
     else
       render json: { errors: user.errors }, status: :unprocessable_entity
     end
+  end
+
+  def destroy
+    current_user.destroy
+    head 204
   end
 
   private
