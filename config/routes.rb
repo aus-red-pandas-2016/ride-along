@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   resources :users, only: [:create, :show]
   post '/login', to: 'sessions#create'
 
-  resources :places #, only: [:create, :update, :destroy]
+  resources :places , only: :show#[:create, :update, :destroy]
 end
 
 

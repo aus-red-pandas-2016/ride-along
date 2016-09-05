@@ -3,7 +3,8 @@ class PlacesController < ApplicationController
 	
 
   def show
-    respond_with Place.find(params[:id])
+    @place = Place.find(params[:id])
+    render json: @place
   end
 	
 	def delete
@@ -12,7 +13,8 @@ class PlacesController < ApplicationController
 	end
 
 	private
-  def place_params
-    params.require(:place).permit(:type, :street, :city, :state, :zip)
-  end
+    def place_params
+      params.require(:place).permit(:type, :street, :city, :state, :zip)
+    end
+
 end
