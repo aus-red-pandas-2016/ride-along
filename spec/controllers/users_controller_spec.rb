@@ -1,11 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe UsersController, type: :controller do
+  before(:each) { request.headers['Accept'] =  "#{Mime[:json]}" }
+
   describe 'GET #show' do
     it 'returns the users info' do
       user = create(:user)
 
-      get :show, params: { id: user.id }, format: :json
+      get :show, params: { id: user.id }
 
       expect(response).to be_successful
       expect(response_body[:email]).to eq user.email
@@ -16,7 +18,7 @@ RSpec.describe UsersController, type: :controller do
     context 'when successfully created' do
       before(:each) do
         @user_attributes = attributes_for(:user)
-        post :create, params: { user: @user_attributes }, format: :json
+        post :create, params: { user: @user_attributes }
       end
 
       it 'renders json representation for the user just created' do
@@ -29,7 +31,7 @@ RSpec.describe UsersController, type: :controller do
     context 'when not created' do
       before(:each) do
         invalid_user_attributes = { password: 'password', password_confirmation: 'password' }
-        post :create, params: { user: invalid_user_attributes }, format: :json
+        post :create, params: { user: invalid_user_attributes }
       end
 
       it 'renders an errors json' do
@@ -60,6 +62,7 @@ RSpec.describe UsersController, type: :controller do
 
       it { should respond_with 200 }
     end
+
     context 'when not updated' do
       before(:each) do
         @user = create(:user)
