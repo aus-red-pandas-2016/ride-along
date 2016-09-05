@@ -1,15 +1,17 @@
 class SessionsController < ApplicationController
-  # skip_before_action :authenticate_user_from_token!
 
   def create
-    @user = User.find_for_database_authentication(email: params[:email])
-    return invalid_login_attempt unless @user
+    password = params[:session][:password]
+    email = params[:session][:email]
+    user = User.find_by_email email
 
-    if @user.valid_password?(params[:password])
-      sign_in :user, @user
-      render json: @user
+    if user.valid_password? password
+      sign_in user, store: false
+      user.generate_authentication_token!
+      user.save
+      render json: user, status: 200, location: user
     else
-      invalid_login_attempt
+      render json: { errors: "Invalid email or password" }, status: 422
     end
   end
 

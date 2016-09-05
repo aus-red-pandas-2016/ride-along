@@ -7,10 +7,7 @@ require 'spec_helper'
 require 'rspec/rails'
 
 # Add additional requires below this line. Rails is not loaded until this point!
-
-RSpec.configure do |config|
-  config.include Devise::Test::ControllerHelpers, type: :controller
-end
+Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 
 Shoulda::Matchers.configure do |config|
   config.integrate do |with|
@@ -65,4 +62,7 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
+
+  config.include Request::JsonHelpers, type: :controller
+  config.include Devise::Test::ControllerHelpers, type: :controller
 end
