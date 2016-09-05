@@ -1,10 +1,16 @@
-require 'spec_helper'
+require 'rails_helper'
 
 RSpec.describe PlacesController, type: :controller do
 	describe "GET #show" do
-    before(:each) do
+		before(:each) do
+			@user = FactoryGirl.create :user
       @place = FactoryGirl.create :place
-      get :show, id: @place.id
+      binding.pry
+      @user.places.push(@place)
+    end
+    it 'returns the places info' do
+      get :show, params: {id: @place.id}
+      expect(response).to be_successful
     end
 
     # it "returns the information about a place on a hash" do

@@ -12,3 +12,5 @@ RSpec.describe Place, type: :model do
 
 
 end
+
+
