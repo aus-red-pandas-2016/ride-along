@@ -1,9 +1,14 @@
 class PlacesController < ApplicationController
 	 before_action :set_user
 
+  def show
+    @place = @user.places.find(params[:id])
+    render json: @place
+  end
+
   def create
-    #@place = @user.places.new(place_params)
-    @place = Place.find(params[:id])
+    @place = @user.places.new(place_params)
+    #@place = Place.find(params[:id])
     if @place.save
       render json: @place, status: :created, location: @place
     else
@@ -12,6 +17,7 @@ class PlacesController < ApplicationController
   end
 
   def update
+    @place = @user.places.find(params[:id])
     @place.update(place_params)
 
     if @place.save
@@ -22,8 +28,8 @@ class PlacesController < ApplicationController
   end
 	
 	def delete
-		#@place = @user.places.find(params[:id])
-		@place = Place.find(params[:id])
+		@place = @user.places.find(params[:id])
+		#@place = Place.find(params[:id])
     @place.destroy
 	end
 
@@ -32,7 +38,7 @@ class PlacesController < ApplicationController
     params.require(:place).permit(:type, :street, :city, :state, :zip)
   end
 
-  # def set_user
-  #   @user = User.find(params[:user_id])
-  # end
+  def set_user
+    @user = User.find(params[:user_id])
+  end
 end

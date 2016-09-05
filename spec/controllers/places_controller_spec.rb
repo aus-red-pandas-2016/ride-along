@@ -1,20 +1,24 @@
 require 'rails_helper'
 
 RSpec.describe PlacesController, type: :controller do
-	describe "GET #show" do
-		before(:each) do
+	before(:each) do
+			request.headers['Accept'] =  "#{Mime[:json]}"
       @place = FactoryGirl.build :place
     end
-    it 'returns the places info' do
-      get :show, params: {id: @place.id}
-      expect(response).to be_successful
+
+	describe 'POST #create' do
+    context 'when successfully created' do
+      before(:each) do
+        @place_attributes = attributes_for(:place)
+        post :create, params: { place: @place_attributes }
+      end
+
+      it 'renders json representation for the place just created' do
+        expect(response_body[:street]).to eq @place_attributes[:street]
+      end
+     
+     	it { should respond_with 201 }
+
     end
-
-    # it "returns the information about a place on a hash" do
-    #   place_response = json_response
-    #   expect(place_response[:street]).to eql @place.street
-    # end
-
-    # it { should respond_with 200 }
   end
 end
