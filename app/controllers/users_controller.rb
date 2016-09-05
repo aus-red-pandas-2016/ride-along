@@ -1,5 +1,4 @@
 class UsersController < ApplicationController
-  # skip_before_action :authenticate_user_from_token!, only: [:create]
   before_action :set_user, only: [:show, :update]
 
   def show
@@ -17,12 +16,12 @@ class UsersController < ApplicationController
   end
 
   def update
-    @user.update(user_params)
+    user = current_user
 
-    if @user.save
-      render json: @user, status: 200, location: @user
+    if user.update(user_params)
+      render json: user, status: 200, location: user
     else
-      render json: { errors: @user.errors }, status: :unprocessable_entity
+      render json: { errors: user.errors }, status: :unprocessable_entity
     end
   end
 

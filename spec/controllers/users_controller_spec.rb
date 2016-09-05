@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe UsersController, type: :controller do
+
   before(:each) { request.headers['Accept'] =  "#{Mime[:json]}" }
 
   describe 'GET #show' do
@@ -49,9 +50,13 @@ RSpec.describe UsersController, type: :controller do
   end
 
   describe 'PUT/PATCH #update' do
+    before(:each) do
+      @user = create(:user)
+      auth_header(@user.auth_token)
+    end
+
     context 'when successfully updated' do
       before(:each) do
-        @user = create(:user)
         patch :update, params: { id: @user.id, user: { email: 'newmail@example.com' } }
       end
 
@@ -65,7 +70,6 @@ RSpec.describe UsersController, type: :controller do
 
     context 'when not updated' do
       before(:each) do
-        @user = create(:user)
         patch :update, params: { id: @user.id, user: { email: 'bademail.com' } }
       end
 
