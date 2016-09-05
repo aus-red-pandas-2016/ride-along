@@ -84,6 +84,3 @@ RSpec.describe UsersController, type: :controller do
   end
 end
 
-# def response_body
-#   JSON.parse(response.body, symbolize_names: true)[:data][:attributes]
-# end
