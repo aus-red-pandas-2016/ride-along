@@ -35,4 +35,27 @@ describe Authenticable do
       expect(authentication.authenticate_with_token![:status]).to eq :unauthorized
     end
   end
+
+  describe '.user_signed_in?' do
+    context "when there is a user on 'session'" do
+      before do
+        @user = create :user
+        authentication.stub(:current_user).and_return(@user)
+      end
+
+      it 'should sign in the user' do
+        expect(authentication.user_signed_in?).to be_truthy
+      end
+    end
+
+    context "when there is not a user on 'session'" do
+      before do
+        authentication.stub(:current_user).and_return(nil)
+      end
+
+      it 'should not sign in a user' do
+        expect(authentication.user_signed_in?).to be_falsey
+      end
+    end
+  end
 end
