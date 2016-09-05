@@ -5,13 +5,9 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-
   validates_presence_of :email
+  validates_uniqueness_of :email, :auth_token
 
   has_one :work
   has_one :home
-
-  def authentication_token
-    auth_token
-  end
 end
