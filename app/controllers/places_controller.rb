@@ -10,7 +10,7 @@ class PlacesController < ApplicationController
     @place = @user.places.new(place_params)
     #@place = Place.find(params[:id])
     if @place.save
-      render json: @place, status: :created, location: @place
+      render json: @place #, status: :created, location: @place
     else
       puts "Error!" 
     end
@@ -21,7 +21,7 @@ class PlacesController < ApplicationController
     @place.update(place_params)
 
     if @place.save
-      render json: @place, status: 200, location: @place
+      render json: @place #, status: 200, location: @place
     else
        puts "Error!"
     end
