@@ -1,6 +1,6 @@
 class TripsController < ApplicationController
   include ActionController::Serialization 
-  skip_before_action :authenticate_user_from_token!
+  # skip_before_action :authenticate_user_from_token!
 
   def index 
     user = User.find(params[:user_id])
@@ -25,8 +25,7 @@ class TripsController < ApplicationController
     rider = User.find(params[:user_id])
     trip.riders << rider
     trip.save
-    rider.rides << trip
-    rider.save
+    
   end
 
   def destroy
