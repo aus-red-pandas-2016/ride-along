@@ -33,6 +33,23 @@ RSpec.describe TripsController, type: :controller do
       expect(Trip.new(response_body['rides'][0])).to eq(trip)
     end
   end
+
+  describe 'PATCH update' do 
+    it 'increases the number of riders by 1' do 
+      expect { patch(:update, {user_id: user.id, trip_id: trip.id }) }.to change(trip.riders, :count).by(1) 
+    end
+    it 'adds the user to the riders list' do 
+      patch :update, params: {user_id: user.id, trip_id: trip.id}
+      expect(trip.riders).to include(user)
+    end
+  end
+
+  describe 'DELETE destroy' do 
+    it 'removes the post from the database' do 
+      delete :destroy, params: {trip_id: trip.id}
+      expect(Trip.all).not_to include(trip) 
+    end
+  end
 end
 
 def response_body
