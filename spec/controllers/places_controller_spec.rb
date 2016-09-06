@@ -1,12 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe PlacesController, type: :controller do
-	before(:each) do
+	before(:all) do
 		@user1 = FactoryGirl.create(:user)
 		@place1 = FactoryGirl.create(:place, user:@user1)
 	end
-
-	#{request.headers['Accept'] =  "#{Mime[:json]}" }
 
 	describe 'POST #create' do
     context 'when successfully created' do
@@ -23,15 +21,19 @@ RSpec.describe PlacesController, type: :controller do
     		@response = JSON.parse(response.body)
         expect(response["street"]).to eq @place_attributes[:street]
       end
-    
-    end	
+    end
   end
-
-  # describe 'PUT/PATCH #update' do
-  #   before(:each) do
-  #     @user = create(:user)
-  #     @place = create(:place)
-  #     auth_header(@user.auth_token)
-  #   end
-  # end
+    # context "with invalid attributes" do
+    # 	it "does not save the new place" do
+    #   	expect{post :create, params:{user_id: @place1.user_id, place: @invalid_place}
+    #   	}.to_not change(Place,:count)
+    # 	end
+    # end	
+  describe 'DELETE #destroy' do
+	  it "deletes the place" do
+	    expect{
+	      delete :destroy, params:{user_id: @place1.user_id, id: @place1.id}
+	      }.to change(Place,:count).by(-1)
+	  end   
+  end
 end

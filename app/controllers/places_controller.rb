@@ -27,7 +27,7 @@ class PlacesController < ApplicationController
     end
   end
 	
-	def delete
+	def destroy
 		@place = @user.places.find(params[:id])
 		#@place = Place.find(params[:id])
     @place.destroy
