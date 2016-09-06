@@ -18,17 +18,23 @@ RSpec.describe PlacesController, type: :controller do
     	end
 
     	it 'renders json representation for the place just created' do
-    		@response = JSON.parse(response.body)
-        expect(response["street"]).to eq @place_attributes[:street]
+    		@response = JSON.parse(response.body, symbolize_names: true)
+        expect(@response[:street]).to eq @place_attributes[:street]
       end
     end
   end
-    # context "with invalid attributes" do
-    # 	it "does not save the new place" do
-    #   	expect{post :create, params:{user_id: @place1.user_id, place: @invalid_place}
-    #   	}.to_not change(Place,:count)
-    # 	end
-    # end	
+  describe 'PUT/PATCH #update' do
+  	context 'when successfully updated' do
+      before(:each) do
+        patch :update, params: {user_id: @place1.user_id, id: @place1.id, place:{city:"Austin"}}
+      end 
+
+    it 'renders json representation of the updated place' do
+        @place_response = JSON.parse(response.body, symbolize_names: true)
+        expect(@place_response[:city]).to eq 'Austin'
+      end 	
+    end
+  end    
   describe 'DELETE #destroy' do
 	  it "deletes the place" do
 	    expect{
