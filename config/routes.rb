@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
   get '/trips', to: 'trips#index'
   post '/trips', to: 'trips#create'
+  get 'trips/:trip_id', to: 'trips#show'
   put 'trips/:trip_id', to: 'trips#update'
   patch 'trips/:trip_id', to: 'trips#update'
   delete 'trips/:trip_id', to: 'trips#destroy'
