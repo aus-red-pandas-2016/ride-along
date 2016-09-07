@@ -23,7 +23,6 @@ RSpec.describe UsersController, type: :controller do
       end
 
       it 'renders json representation for the user just created' do
-        binding.pry
         expect(response_body[:email]).to eq @user_attributes[:email]
       end
 
