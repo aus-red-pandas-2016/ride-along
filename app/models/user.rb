@@ -11,6 +11,7 @@ class User < ApplicationRecord
 
   has_one :work
   has_one :home
+  has_many :places
 
   def generate_authentication_token!
     begin
