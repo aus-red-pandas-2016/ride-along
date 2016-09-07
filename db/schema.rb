@@ -27,6 +27,20 @@ ActiveRecord::Schema.define(version: 20160906140834) do
     t.index ["user_id"], name: "index_places_on_user_id", using: :btree
   end
 
+  create_table "trips", force: :cascade do |t|
+    t.integer  "driver_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "trips_type"
+  end
+
+  create_table "trips_users", force: :cascade do |t|
+    t.integer  "trip_id"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string   "provider",               default: "email", null: false
     t.string   "uid",                    default: "",      null: false
