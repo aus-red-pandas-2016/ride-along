@@ -64,6 +64,9 @@ GEM
       railties (>= 4.1.0, < 5.1)
       responders
       warden (~> 1.2.3)
+    devise_token_auth (0.1.39)
+      devise (> 3.5.2, <= 4.2)
+      rails (< 6)
     diff-lcs (1.2.5)
     erubis (2.7.0)
     every_day_irb (2.0.0)
@@ -140,6 +143,7 @@ GEM
       slop (~> 3.4)
     puma (3.6.0)
     rack (2.0.1)
+    rack-cors (0.4.0)
     rack-test (0.6.3)
       rack (>= 1.0)
     rails (5.0.0.1)
@@ -193,10 +197,6 @@ GEM
     ruby_version (1.0.1)
     shoulda-matchers (3.1.1)
       activesupport (>= 4.0.0)
-    simple_token_authentication (1.14.0)
-      actionmailer (>= 3.2.6, < 6)
-      actionpack (>= 3.2.6, < 6)
-      devise (>= 3.2, < 6)
     slop (3.6.0)
     spoon (0.0.4)
       ffi
@@ -231,6 +231,7 @@ DEPENDENCIES
   active_model_serializers (~> 0.10.0)
   byebug
   devise
+  devise_token_auth
   factory_girl_rails
   faker
   irbtools
@@ -238,10 +239,10 @@ DEPENDENCIES
   pg (~> 0.18)
   pry
   puma (~> 3.0)
+  rack-cors
   rails (~> 5.0.0, >= 5.0.0.1)
   rspec-rails (~> 3.5)
   shoulda-matchers (~> 3.1)
-  simple_token_authentication (~> 1.14.0)
   spring
   spring-watcher-listen (~> 2.0.0)
   tzinfo-data
