@@ -1,14 +1,19 @@
 Rails.application.routes.draw do
-
   devise_for :users
 
-  resources :users, only: [:create, :show]
   post '/login', to: 'sessions#create'
+
   get '/trips', to: 'trips#index'
   post '/trips', to: 'trips#create'
   put 'trips/:trip_id', to: 'trips#update'
   patch 'trips/:trip_id', to: 'trips#update'
   delete 'trips/:trip_id', to: 'trips#destroy'
+
+  resources :users, only: [:create, :show, :update, :destroy]
+  resources :sessions, only: [:create, :destroy]
+  resources :users, only: :show do
+  	resources :places , only: [:show, :create, :update, :destroy]
+  end
 
 end
 
