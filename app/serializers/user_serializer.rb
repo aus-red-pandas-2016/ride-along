@@ -1,11 +1,11 @@
 class UserSerializer < ActiveModel::Serializer
-  attributes :id, :email, :trips, :rides #, :auth_token
-  
+  attributes :id, :email, :trips, :rides
+
   def trips
-    User.find(object.id).trips
+    object.trips
   end
 
   def rides
-    User.find(object.id).rides
+    object.rides
   end
 end
