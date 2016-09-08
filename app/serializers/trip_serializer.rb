@@ -1,19 +1,19 @@
 class TripSerializer < ActiveModel::Serializer
-  attributes :id, :departure_time, :arrival_time, :driver, :riders
+  attributes :id, :departure, :arrival, :driver, :riders
 
   def driver
-    Trip.find(object.id).driver   
-  end 
+    object.driver
+  end
 
   def riders
-    Trip.find(object.id).riders   
-  end 
+    object.riders.count
+  end
 
-  def departure_time 
+  def departure
     object.departure_time.strftime("%l:%M %p")
   end
 
-  def arrival_time 
+  def arrival
     object.arrival_time.strftime("%l:%M %p")
   end
 
