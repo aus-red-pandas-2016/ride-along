@@ -3,11 +3,13 @@ class TripsController < ApplicationController
   # skip_before_action :authenticate_user_from_token!
 
   def index 
-    user = User.find(params[:user_id])
-    trips = user.trips
-    rides = user.rides
-    @trips = {trips: trips, rides: rides}
+    @trips = Trip.all 
     render json: @trips 
+  end
+
+  def show
+    @trip = Trip.find(params[:trip_id])
+    render json: @trip
   end
 
   def create
