@@ -9,4 +9,12 @@ class TripSerializer < ActiveModel::Serializer
     Trip.find(object.id).riders   
   end 
 
+  def departure_time 
+    object.departure_time.strftime("%l:%M %p")
+  end
+
+  def arrival_time 
+    object.arrival_time.strftime("%l:%M %p")
+  end
+
 end
