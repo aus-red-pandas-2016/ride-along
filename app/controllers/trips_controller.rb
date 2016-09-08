@@ -1,10 +1,9 @@
 class TripsController < ApplicationController
-  include ActionController::Serialization 
-  # skip_before_action :authenticate_user_from_token!
+  include ActionController::Serialization
 
-  def index 
-    @trips = Trip.all 
-    render json: @trips 
+  def index
+    @trips = Trip.all
+    render json: @trips
   end
 
   def show
@@ -15,11 +14,11 @@ class TripsController < ApplicationController
   def create
     user = User.find(params[:user_id])
     @trip = user.trips.new(driver_id: user.id,trips_type: params[:type])
-    if @trip.save 
+    if @trip.save
       render json: @trip, status: :created
     else
       render json: @trip.errors, status: :unprocessable_entity
-    end 
+    end
   end
 
   def update
@@ -27,7 +26,7 @@ class TripsController < ApplicationController
     rider = User.find(params[:user_id])
     trip.riders << rider
     trip.save
-    
+
   end
 
   def destroy
