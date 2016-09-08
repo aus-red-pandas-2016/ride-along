@@ -2,9 +2,9 @@ Rails.application.routes.draw do
   mount_devise_token_auth_for 'User', at: 'auth'
 
   post '/login', to: 'sessions#create'
-
   get '/trips', to: 'trips#index'
   post '/trips', to: 'trips#create'
+  get 'trips/available', to: 'trips#available'
   get 'trips/:trip_id', to: 'trips#show'
   put 'trips/:trip_id', to: 'trips#update'
   patch 'trips/:trip_id', to: 'trips#update'
