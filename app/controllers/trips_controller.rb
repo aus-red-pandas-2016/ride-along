@@ -6,7 +6,7 @@ class TripsController < ApplicationController
     render json: @trips
   end
 
-  def available 
+  def available
     user =  User.find(params[:user_id])
     @trips = Trip.all - user.trips - user.rides
     render json: @trips
