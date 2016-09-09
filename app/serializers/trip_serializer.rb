@@ -1,5 +1,5 @@
 class TripSerializer < ActiveModel::Serializer
-  attributes :id, :departure, :arrival, :driver, :riders, :email, :rating
+  attributes :id, :departure, :arrival,:count, :riders, :email, :rating
 
   def driver
     object.driver.name
@@ -13,7 +13,7 @@ class TripSerializer < ActiveModel::Serializer
     object.driver.email
   end
 
-  def riders
+  def count
     object.riders.count
   end
 
