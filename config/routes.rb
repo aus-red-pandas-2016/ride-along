@@ -16,6 +16,8 @@ Rails.application.routes.draw do
   	resources :places , only: [:show, :create, :update, :destroy]
   end
 
+  get 'users/:id/trips' => 'users#trips'
+
 end
 
 

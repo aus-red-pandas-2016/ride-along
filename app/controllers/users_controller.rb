@@ -1,7 +1,10 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :update]
-  # before_action :authenticate_with_token!, only: [:update, :destroy]
+  before_action :set_user, only: [:show, :update, :trips]
 
+  def trips
+    @trips = @user.trips
+    render json: @trips, include: ['riders']
+  end
   def show
     render json: @user
   end
@@ -37,7 +40,7 @@ class UsersController < ApplicationController
   end
 
   def set_user
-    @user = User.find params[:id]
+    @user = User.find(params[:id])
   end
 end
 
