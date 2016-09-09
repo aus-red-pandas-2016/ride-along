@@ -18,6 +18,7 @@ Rails.application.routes.draw do
 
   get '/users/:id/trips', to: 'users#trips'
 
+
 end
 
 
