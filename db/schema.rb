@@ -71,9 +71,4 @@ ActiveRecord::Schema.define(version: 20160907220717) do
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true, using: :btree
   end
 
-  create_table "users_trips", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "trip_id"
-  end
-
 end

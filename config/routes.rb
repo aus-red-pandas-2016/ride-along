@@ -10,7 +10,12 @@ Rails.application.routes.draw do
   patch 'trips/:trip_id', to: 'trips#update'
   delete 'trips/:trip_id', to: 'trips#destroy'
 
+  resources :users, only: :show do
+    resources :request, only: [:create, :update]
+  end
+
   resources :users, only: [:create, :show, :update, :destroy]
+
   # resources :sessions, only: [:create, :destroy]
   resources :users, only: :show do
   	resources :places , only: [:show, :create, :update, :destroy]
