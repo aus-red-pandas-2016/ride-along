@@ -1,11 +1,5 @@
 class UserSerializer < ActiveModel::Serializer
-  attributes :id, :email, :trips, :rides
+  attributes :id, :email, :rides, :name, :trips
 
-  def trips
-    object.trips
-  end
-
-  def rides
-    object.rides
-  end
+  has_many :trips, serializer: TripSerializer
 end
