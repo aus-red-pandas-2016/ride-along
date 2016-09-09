@@ -4,7 +4,7 @@ class UsersController < ApplicationController
 
   def trips
     @trips = @user.trips
-    render json: @trips, include: ['riders']
+    render json: @trips, include: [:riders, :requests]
   end
 
   def show

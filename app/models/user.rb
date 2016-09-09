@@ -15,4 +15,5 @@ class User < ApplicationRecord
 
   has_many :trips, foreign_key: :driver_id
   has_many :places
+  has_many :requests
 end

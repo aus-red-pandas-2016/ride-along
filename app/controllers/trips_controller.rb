@@ -9,7 +9,7 @@ class TripsController < ApplicationController
   def available
     user =  User.find(params[:user_id])
     @trips = Trip.all - user.trips - user.rides
-    render json: @trips
+    render json: @trips, include: [:requests]
   end
 
   def show
@@ -30,9 +30,8 @@ class TripsController < ApplicationController
   def update
     trip = Trip.find(params[:trip_id])
     rider = User.find(params[:user_id])
-    trip.riders << rider
+    trip.riders.delete('rider')
     trip.save
-
   end
 
   def destroy
