@@ -25,3 +25,5 @@ trip3.riders = [tj, jess]
 trip4.riders = [tj, jess]
 trip5.riders = [jay]
 trip6.riders = [jay]
+
+request1 = trip1.requests.create(user_id: 6) 
