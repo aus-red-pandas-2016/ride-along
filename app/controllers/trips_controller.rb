@@ -9,7 +9,7 @@ class TripsController < ApplicationController
   def available
     user =  User.find(params[:user_id])
     @trips = Trip.all - user.trips - user.rides
-    render json: @trips
+    render json: @trips, include: [:requests]
   end
 
   def show

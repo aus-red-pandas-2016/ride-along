@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   delete 'trips/:trip_id', to: 'trips#destroy'
 
   resources :trips, only: :show do
-    resources :request, only: [:create, :update]
+    resources :requests, only: [:create, :update, :index]
   end
 
   resources :users, only: [:create, :show, :update, :destroy]
