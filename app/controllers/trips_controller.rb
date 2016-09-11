@@ -1,5 +1,4 @@
 class TripsController < ApplicationController
-  include ActionController::Serialization
 
   def index
     @trips = Trip.all
@@ -8,8 +7,8 @@ class TripsController < ApplicationController
 
   def available
     user =  User.find(params[:user_id])
-    @trips = Trip.all - user.trips - user.rides
-    render json: @trips, include: [:requests]
+    trips = Trip.available_to(user) - user.rides
+    render json: trips, each_serializer: AvailableTripSerializer, scope: user
   end
 
   def show

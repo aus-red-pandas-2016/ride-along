@@ -1,5 +1,7 @@
 class UserSerializer < ActiveModel::Serializer
-  attributes :id, :email, :rides, :name, :trips
+  attributes :id, :email, :name, :rating
 
-  has_many :trips, serializer: TripSerializer
+  def rating
+    "4.6"
+  end
 end
