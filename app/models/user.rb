@@ -18,7 +18,7 @@ class User < ApplicationRecord
   has_many :requests
 
   def matches
-    Trip.includes(:requests).where.not(driver: self) - self.rides
+    Trip.includes(:requests).available_to(self) - self.rides
   end
 
   def rating
