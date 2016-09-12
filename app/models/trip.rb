@@ -16,4 +16,8 @@ class Trip < ApplicationRecord
   def count
     self.riders.count
   end
+
+  def pending_requests
+    requests.where(pending: true)
+  end
 end

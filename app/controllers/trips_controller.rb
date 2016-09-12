@@ -6,8 +6,13 @@ class TripsController < ApplicationController
   end
 
   def available
-    @user =  User.find(1)
-    @trips = @user.matches
+    @user =  User.find(3)
+    @matches = @user.matches
+  end
+
+  def drives
+    @user = User.find(1)
+    @drives = @user.trips.includes(:riders, :requests)
   end
 
   def show

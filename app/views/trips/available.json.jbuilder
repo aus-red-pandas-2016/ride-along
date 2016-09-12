@@ -1,19 +1,19 @@
-json.array! @trips do |trip|
+json.array! @matches do |match|
 
-  json.id trip.id
-  json.departure trip.departure
-  json.arrival trip.arrival
-  json.count trip.count
+  json.id match.id
+  json.departure match.departure
+  json.arrival match.arrival
+  json.count match.count
 
   json.driver do
-    json.name trip.driver.name
-    json.email trip.driver.email
-    json.rating trip.driver.rating
+    json.name match.driver.name
+    json.email match.driver.email
+    json.rating match.driver.rating
   end
 
-  req = trip.requests.where(user_id: @user.id)
-  if req.exists?
-    json.pending req.pluck(:pending).first
+  request = match.requests.where(user_id: @user.id)
+  if request.exists?
+    json.pending request.pluck(:pending).first
   else
    json.pending false
   end

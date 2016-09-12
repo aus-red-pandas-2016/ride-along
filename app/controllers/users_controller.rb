@@ -3,7 +3,7 @@ class UsersController < ApplicationController
 
   def trips
     trips = Trip.where(driver: @user).includes(:requests)
-    render json: trips, each_serializer: TripSerializer
+    render json: trips.as_json(include: [:requests])
   end
 
   def show
