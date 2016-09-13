@@ -12,7 +12,7 @@ gem 'jbuilder', '~> 2.5'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
 gem 'devise'
-gem 'devise_token_auth'
+gem 'jwt'
 
 # gem 'active_model_serializers', '~> 0.10.0'
 # Use Capistrano for deployment
