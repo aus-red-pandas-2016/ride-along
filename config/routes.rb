@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  mount_devise_token_auth_for 'User', at: 'auth'
+
+  post '/auth' => 'authentication#authenticate_user'
 
   get 'trips/available', to: 'trips#available'
   get 'trips/drives', to: 'trips#drives'

@@ -1,4 +1,5 @@
 class TripsController < ApplicationController
+  before_filter :authenticate_request!
 
   def index
     @trips = Trip.all
