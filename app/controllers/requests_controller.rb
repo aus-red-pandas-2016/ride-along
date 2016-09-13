@@ -21,8 +21,8 @@ class RequestsController < ApplicationController
 	  @request = Request.find params[:id]
 	  if params[:response] == "accept"
 	  	@request.trip.riders << @request.user
-	  	@request.pending = false
 	  end
+  	@request.pending = false
 	  @request.save
 	end
 end

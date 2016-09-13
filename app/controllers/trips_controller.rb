@@ -35,10 +35,8 @@ class TripsController < ApplicationController
   end
 
   def update
-    trip = Trip.find(params[:trip_id])
-    rider = User.find(params[:user_id])
-    trip.riders.delete('rider')
-    trip.save
+    trip = Trip.includes(:riders).find(params[:id])
+    trip.riders.delete(params[:user_id])
   end
 
   def destroy
