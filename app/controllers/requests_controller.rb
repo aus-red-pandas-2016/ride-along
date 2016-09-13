@@ -18,11 +18,11 @@ class RequestsController < ApplicationController
 	end
 
 	def update
-		@trip = Trip.find(params[:trip_id])
-	  @request = Request.find(params[:request_id])
-	  if params[:answer] == 'accept'
-	  	@trip.riders << User.find(params[:user_id])
+	  @request = Request.find params[:id]
+	  if params[:response] == "accept"
+	  	@request.trip.riders << @request.user
+	  	@request.pending = false
 	  end
-	  @request.pending = false
+	  @request.save
 	end
 end

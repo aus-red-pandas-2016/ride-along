@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_filter :authenticate_request!, except: [:create]
+  # before_filter :authenticate_request!, except: [:create]
   before_action :set_user, only: [:show, :update, :trips, :destroy]
 
   def trips

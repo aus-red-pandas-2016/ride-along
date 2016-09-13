@@ -1,5 +1,5 @@
 class TripsController < ApplicationController
-  before_filter :authenticate_request!
+  # before_filter :authenticate_request!
 
   def index
     @trips = Trip.all
@@ -7,7 +7,7 @@ class TripsController < ApplicationController
   end
 
   def available
-    @user =  User.find(3)
+    @user =  User.find(1)
     @matches = @user.matches
   end
 
