@@ -1,10 +1,9 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :update, :trips]
-  # before_action :authenticate_with_token!, only: [:update, :destroy]
+  before_action :set_user, only: [:show, :update, :trips, :destroy]
 
   def trips
-    @trips = @user.trips
-    render json: @trips, include: [:riders, :requests]
+    trips = Trip.where(driver: @user).includes(:requests)
+    render json: trips.as_json(include: [:requests])
   end
 
   def show
@@ -32,7 +31,7 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    current_user.destroy
+    @user.destroy
     head 204
   end
 

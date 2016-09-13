@@ -14,7 +14,7 @@ class RequestsController < ApplicationController
 	def create
 		@trip = Trip.find(params[:trip_id])
 		@request = @trip.requests.create(user_id: params[:user_id], pending: true)
-		render json: @request
+		render json: @request, status: :created
 	end
 
 	def update
