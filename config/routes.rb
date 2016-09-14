@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  devise_for :users
   post '/auth' => 'authentication#authenticate_user'
 
   get 'trips/available', to: 'trips#available'
