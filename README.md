@@ -44,7 +44,7 @@ Endpoint examples to come...
 
 Pull down the font end UI. [Ride-Along-UI](https://github.com/TomHoDev/ride-along-ui)
 
-#Coming Features
+###Coming Features
 Improve ride searching function by adding geolocation
 
 
